@@ -7,7 +7,7 @@ USE `java2` ;
 
 DROP TABLE IF EXISTS `tasks` ;
 
-CREATE TABLE IF NOT EXISTS `tasks` (
+CREATE TABLE IF NOT EXISTS `tickets` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(32) NOT NULL,
   `description` VARCHAR(100) NOT NULL,

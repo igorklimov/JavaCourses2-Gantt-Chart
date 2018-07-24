@@ -1,5 +1,5 @@
 import database.Database;
-import database.InMemoryDatabase;
+import database.JDBCDatabaseImplementation;
 import services.AddTicketService;
 import services.PrintTicketService;
 import services.RemoveTicketService;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Application {
     public static void main(String[] args) {
-        Database database = new InMemoryDatabase();
+        Database database = new JDBCDatabaseImplementation();
         AddTicketService addTaskService = new AddTicketService(database);
         RemoveTicketService removeTaskService = new RemoveTicketService(database);
         PrintTicketService printTaskService = new PrintTicketService(database);

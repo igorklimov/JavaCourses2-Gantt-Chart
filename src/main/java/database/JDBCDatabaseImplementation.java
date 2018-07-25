@@ -17,11 +17,12 @@ public class JDBCDatabaseImplementation extends JDBCRepository implements Databa
         Connection connection = null;
         try {
             connection = getConnection();
-            String sql = "insert into TICKETS(id, title, dueDate) values(default, ?, ?)";
+            String sql = "insert into TICKETS(id, taskKey, title, dueDate) values(default, ?, ?, ?)";
             PreparedStatement preparedStatement =
                     connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-            preparedStatement.setString(1, ticket.getTitle());
-            preparedStatement.setString(2, ticket.getDueDate());
+            preparedStatement.setString(1, ticket.getTaskKey());
+            preparedStatement.setString(2, ticket.getTitle());
+            preparedStatement.setString(3, ticket.getDueDate());
 
             preparedStatement.executeUpdate();
             ResultSet rs = preparedStatement.getGeneratedKeys();
@@ -38,19 +39,20 @@ public class JDBCDatabaseImplementation extends JDBCRepository implements Databa
     }
 
     @Override
-    public Optional<Ticket> getById(String title) {
+    public Optional<Ticket> getByTaskKey(String taskKey) {
         Connection connection = null;
 
         try {
             connection = getConnection();
-            String sql = "select * from TICKETS where id = ?";
+            String sql = "select * from TICKETS where taskKey = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, title);
+            preparedStatement.setString(1, taskKey);
             ResultSet resultSet = preparedStatement.executeQuery();
             Ticket ticket = null;
             if (resultSet.next()) {
                 ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
+                ticket.setTaskKey(resultSet.getString("taskKey"));
                 ticket.setTitle(resultSet.getString("title"));
                 ticket.setDueDate(resultSet.getString("dueDate"));
             }
@@ -69,9 +71,9 @@ public class JDBCDatabaseImplementation extends JDBCRepository implements Databa
         Connection connection = null;
         try {
             connection = getConnection();
-            String sql = "delete from TICKETS where id = ?";
+            String sql = "delete from TICKETS where taskKey = ?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setLong(1, ticket.getId());
+            preparedStatement.setString(1, ticket.getTaskKey());
             preparedStatement.executeUpdate();
 
             // TODO how to get deleted record count from result set?
@@ -98,6 +100,7 @@ public class JDBCDatabaseImplementation extends JDBCRepository implements Databa
             while (resultSet.next()) {
                 Ticket ticket = new Ticket();
                 ticket.setId(resultSet.getLong("id"));
+                ticket.setTaskKey(resultSet.getString("taskKey"));
                 ticket.setTitle(resultSet.getString("title"));
                 ticket.setDueDate(resultSet.getString("dueDate"));
                 tickets.add(ticket);

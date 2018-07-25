@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface Database {
     void addTicket(Ticket ticket);
 
-    Optional<Ticket> getById(String id);
+    Optional<Ticket> getByTaskKey(String taskKey);
 
     boolean remove(Ticket ticket);
 

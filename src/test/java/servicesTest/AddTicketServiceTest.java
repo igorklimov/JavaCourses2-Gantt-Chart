@@ -13,15 +13,16 @@ public class AddTicketServiceTest {
 
 
     String id = "testID";
+    String key = "testKey";
     String title = "testTitle";
     String dueDate = "testDueDate";
 
     @Test
     public void testAdd() {
         Ticket ticket = new Ticket();
-        addTicketService.addTicket("TestTitle", "TestDueDate");
+        addTicketService.addTicket("TestKey", "TestTitle","TestDueDate");
         database.addTicket(ticket);
-        Assert.assertEquals(database.getById("TestID"), database.getById("TestID"));
+        Assert.assertEquals(database.getByTaskKey("TestID"), database.getByTaskKey("TestID"));
     }
 
 

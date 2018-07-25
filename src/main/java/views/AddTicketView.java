@@ -17,14 +17,14 @@ public class AddTicketView implements ConsoleView {
         System.out.println();
         System.out.println("Add task to list execution start!");
         Scanner sc = new Scanner(System.in);
-//        System.out.println("Enter task ID:");
-//        Long id = sc.nextLine();
+        System.out.println("Enter task key:");
+        String taskKey = sc.nextLine();
         System.out.println("Enter task title:");
         String title = sc.nextLine();
         System.out.println("Enter task due date:");
-        String description = sc.nextLine();
+        String dueDate = sc.nextLine();
 
-        addTicketService.addTicket(title, description);
+        addTicketService.addTicket(taskKey, title, dueDate);
 
         System.out.println("Add task to list execution end!");
         System.out.println();

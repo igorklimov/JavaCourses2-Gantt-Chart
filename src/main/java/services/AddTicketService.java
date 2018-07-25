@@ -10,8 +10,9 @@ public class AddTicketService {
         this.database = database;
     }
 
-    public void addTicket(String title, String dueDate) {
+    public void addTicket(String taskKey, String title, String dueDate) {
         Ticket ticket = new Ticket();
+        ticket.setTaskKey(taskKey);
         ticket.setTitle(title);
         ticket.setDueDate(dueDate);
         database.addTicket(ticket);

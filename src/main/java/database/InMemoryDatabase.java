@@ -15,20 +15,16 @@ public class InMemoryDatabase implements Database {
     }
 
     @Override
-    public Optional<Ticket> getById(String id) {
+    public Optional<Ticket> getByTaskKey(String taskKey) {
         Ticket ticket = null;
         for (Ticket t : tickets) {
-            if (t.getId().equals(id)) {
+            if (t.getTaskKey().equals(taskKey)) {
                 ticket = t;
                 break;
             }
         }
         return Optional.ofNullable(ticket);
 
-//
-//        return tasks.stream()
-//                .filter(p -> p.getTitle().equals(id)
-//                .findFirst();
     }
 
     @Override

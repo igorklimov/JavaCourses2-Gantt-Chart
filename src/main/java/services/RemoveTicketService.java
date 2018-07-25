@@ -12,8 +12,8 @@ public class RemoveTicketService {
         this.database = database;
     }
 
-    public boolean removeTicketById(String id) {
-        Optional<Ticket> foundTicket = database.getById(id);
+    public boolean removeTicketByTaskKey(String taskKey) {
+        Optional<Ticket> foundTicket = database.getByTaskKey(taskKey);
         if (foundTicket.isPresent()) {
             Ticket ticket = foundTicket.get();
             boolean isRemoved = database.remove(ticket);
